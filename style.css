@@ -1,0 +1,32 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #020220;
+  color: white;
+}
+
+#scrolly-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#graphic {
+  position: sticky;
+  top: 0;
+  width: 70%;
+  height: 100vh;
+}
+
+#text {
+  width: 30%;
+  padding: 20px;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.step {
+  margin-bottom: 150px;
+  padding: 10px;
+  font-size: 1.2em;
+  border-left: 4px solid white;
+}
