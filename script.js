@@ -163,6 +163,8 @@ chart = {
   return svg.node();
 }
 
+world = d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
+
 const steps = document.querySelectorAll(".step");
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
