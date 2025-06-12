@@ -1,11 +1,11 @@
 import React from 'react';
-import Notebook from './Notebook';
+import Map from './Map';
 
 function App() {
   return (
     <div>
-      <h1 style={{ textAlign: "center", color: "white", padding: "20px" }}>Cybersecurity Around the World</h1>
-      <Notebook />
+      <h1 style={{ textAlign: "center", color: "white", padding: "20px" }}>Cybersecurity Map</h1>
+      <Map />
     </div>
   );
 }
