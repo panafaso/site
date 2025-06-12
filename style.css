@@ -13,14 +13,17 @@ body {
 .graphic {
   position: sticky;
   top: 0;
-  width: 50%;
+  width: 100%;
   height: 100vh;
-  background: #020220;
+  display: flex;
+  justify-content: center;  /* Κεντράρει τον χάρτη */
+  align-items: center;
 }
 
 #map {
   width: 100%;
   height: 100%;
+  max-width: 940px;
 }
 
 .scrolly {
