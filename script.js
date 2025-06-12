@@ -135,27 +135,36 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
     .style("border-radius", "6px")
     .style("display", "block");
 
-  function clicked(event, d) {
-    const [[x0, y0], [x1, y1]] = path.bounds(d);
-    event.stopPropagation();
-    countries.transition().style("fill", "#888");
-    countries.transition().style("fill", d => 
-    label.text(d.properties.name);
-    d3.select("#country-title").text(d.properties.name);
+function clicked(event, d) {
+  const [[x0, y0], [x1, y1]] = path.bounds(d);
+  const countryName = d.properties.name;
+
+  // Ακύρωσε παλιά zoom events
+  if (event && event.stopPropagation) event.stopPropagation();
+
+  // Βάψε μόνο τη σωστή χώρα κόκκινη
+  countries.transition().style("fill", d =>
     d.properties.name === countryName ? "red" : "#888"
-    );
+  );
 
-    const info = countryInfo[d.properties.name] || "No data available.";
-    infoBox.html(`<h3>${d.properties.name}</h3><p>${info}</p>`);
+  // Ενημέρωσε τίτλο στο SVG
+  d3.select("#svg-country-title").text(countryName);
 
-    svg.transition().duration(750).call(
-      zoom.transform,
-      d3.zoomIdentity
-        .translate(width / 2, height / 2)
-        .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
-        .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
-    );
-  }
+  // Ενημέρωσε info box
+  const info = countryInfo[countryName] || "No data available.";
+  infoBox.style("display", "block").html(
+    `<h3>${countryName}</h3><p>${info}</p>`
+  );
+
+  // Zoom στη χώρα
+  svg.transition().duration(750).call(
+    zoom.transform,
+    d3.zoomIdentity
+      .translate(width / 2, height / 2)
+      .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
+      .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
+  );
+}
 
   const steps = document.querySelectorAll(".step");
   const observer = new IntersectionObserver((entries) => {
