@@ -19,12 +19,13 @@ body {
 .graphic {
   position: sticky;
   top: 0;
-  width: 100%;
+  width: 50%;
   height: 100vh;
   display: flex;
-  justify-content: center;  /* Κεντράρει τον χάρτη */
+  justify-content: center;
   align-items: center;
 }
+
 #country-title {
   position: absolute;
   top: 40px;
