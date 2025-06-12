@@ -1,3 +1,5 @@
+// script.js
+
 d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(world => {
   const width = 940;
   const height = 500;
@@ -5,19 +7,31 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
   const projection = d3.geoNaturalEarth1();
   const path = d3.geoPath(projection);
 
- const svg = d3.select("#map")
-  .append("svg")
-  .attr("viewBox", [0, 0, width, height])
-  .attr("preserveAspectRatio", "xMidYMid meet")
-  .style("width", "100%")
-  .style("height", "100%")
-  .style("background-color", "#020220");
+  const svg = d3.select("#map")
+    .append("svg")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("preserveAspectRatio", "xMidYMid meet")
+    .style("width", "100%")
+    .style("height", "100%")
+    .style("background-color", "#020220");
 
   const g = svg.append("g");
 
-  const countriesData = topojson.feature(world, world.objects.countries).features;
+  const label = svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", 40)
+    .attr("text-anchor", "middle")
+    .attr("fill", "white")
+    .attr("font-size", "24px")
+    .attr("font-family", "sans-serif")
+    .attr("font-weight", "bold")
+    .text("");
 
-  const selectedCountries = ["Russia", "Germany", "France", "Japan", "Brazil", "Australia", "India", "United Kingdom", "China", "United States of America"];
+  const countriesData = topojson.feature(world, world.objects.countries).features;
+  const selectedCountries = [
+    "Russia", "Germany", "France", "Japan", "Brazil",
+    "Australia", "India", "United Kingdom", "China", "United States of America"
+  ];
   const filtered = countriesData.filter(d => selectedCountries.includes(d.properties.name));
   projection.fitSize([width, height], {type: "FeatureCollection", features: filtered});
 
@@ -48,22 +62,12 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
 
   const zoom = d3.zoom()
     .scaleExtent([1, 8])
-    .on("zoom", zoomed);
+    .on("zoom", event => {
+      g.attr("transform", event.transform);
+      g.attr("stroke-width", 1 / event.transform.k);
+    });
 
   svg.call(zoom);
-
-  const infoBox = d3.select("body").append("div")
-  .attr("id", "info-box")
-  .style("position", "fixed")  // fixed για να μην κουνιέται
-  .style("top", "120px")
-  .style("left", "40px")  // πήγαινε το αριστερά
-  .style("width", "300px")
-  .style("background", "#111")
-  .style("color", "white")
-  .style("padding", "10px")
-  .style("border", "1px solid #444")
-  .style("border-radius", "6px")
-  .style("display", "block");  // Πάντα εμφανές
 
   const countryInfo = {
   "France": `
@@ -118,6 +122,19 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
   `
 };
   
+ const infoBox = d3.select("body").append("div")
+    .attr("id", "info-box")
+    .style("position", "fixed")
+    .style("top", "120px")
+    .style("left", "40px")
+    .style("width", "300px")
+    .style("background", "#111")
+    .style("color", "white")
+    .style("padding", "10px")
+    .style("border", "1px solid #444")
+    .style("border-radius", "6px")
+    .style("display", "block");
+
   function clicked(event, d) {
     const [[x0, y0], [x1, y1]] = path.bounds(d);
     event.stopPropagation();
@@ -125,38 +142,29 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
     d3.select(this).transition().style("fill", "red");
     label.text(d.properties.name);
     d3.select("#country-title").text(d.properties.name);
-    
+
     const info = countryInfo[d.properties.name] || "No data available.";
-    infoBox.style("display", "block").html(
-      `<h3 style='color:white;'>${d.properties.name}</h3><p style='color:white;'>${info}</p>`
-    );
+    infoBox.html(`<h3>${d.properties.name}</h3><p>${info}</p>`);
 
     svg.transition().duration(750).call(
       zoom.transform,
       d3.zoomIdentity
         .translate(width / 2, height / 2)
         .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
-        .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
-      d3.pointer(event, svg.node())
+        .translate(-(x0 + x1) / 2, -(y0 + y1) / 2)
     );
-  }
-
-  function zoomed(event) {
-    const { transform } = event;
-    g.attr("transform", transform);
-    g.attr("stroke-width", 1 / transform.k);
   }
 
   const steps = document.querySelectorAll(".step");
   const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const countryName = entry.target.dataset.country;
-      const country = filtered.find(d => d.properties.name === countryName);
-      if (country) {
-        // Κάλεσε το clicked σαν να έγινε click
-        clicked({ stopPropagation: () => {} }, country);
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const countryName = entry.target.dataset.country;
+        const country = filtered.find(d => d.properties.name === countryName);
+        if (country) clicked({ stopPropagation: () => {} }, country);
       }
-    }
-  });
-}, { threshold: 0.5 });
+    });
+  }, { threshold: 0.5 });
+
+  steps.forEach(step => observer.observe(step));
+});
