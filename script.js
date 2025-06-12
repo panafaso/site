@@ -165,15 +165,15 @@ chart = {
 
 world = d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json")
 
-const steps = document.querySelectorAll(".step");
-const observer = new IntersectionObserver(entries => {
+const steps = document.querySelectorAll("section");
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      const country = entry.target.dataset.country;
-      const d = filtered.find(f => f.properties.name === country);
-      if (d) clicked({stopPropagation(){}}, d);
+      const countryName = entry.target.dataset.country;
+      const country = filtered.find(d => d.properties.name === countryName);
+      if (country) clicked({ stopPropagation: () => {} }, country);
     }
   });
-}, { threshold: 0.6 });
+}, { threshold: 0.5 });
 
 steps.forEach(step => observer.observe(step));
