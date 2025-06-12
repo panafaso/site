@@ -63,16 +63,17 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
   svg.call(zoom);
 
   const infoBox = d3.select("body").append("div")
-    .attr("id", "info-box")
-    .style("position", "absolute")
-    .style("top", "80px")
-    .style("right", "20px")
-    .style("background", "#111")
-    .style("color", "white")
-    .style("padding", "10px")
-    .style("border", "1px solid #444")
-    .style("border-radius", "6px")
-    .style("display", "none");
+  .attr("id", "info-box")
+  .style("position", "fixed")  // fixed για να μην κουνιέται
+  .style("top", "120px")
+  .style("left", "40px")  // πήγαινε το αριστερά
+  .style("width", "300px")
+  .style("background", "#111")
+  .style("color", "white")
+  .style("padding", "10px")
+  .style("border", "1px solid #444")
+  .style("border-radius", "6px")
+  .style("display", "block");  // Πάντα εμφανές
 
   const countryInfo = {
   "France": `
