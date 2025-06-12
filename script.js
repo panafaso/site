@@ -158,14 +158,14 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
 
   const steps = document.querySelectorAll("section");
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const countryName = entry.target.dataset.country;
-        const country = filtered.find(d => d.properties.name === countryName);
-        if (country) clicked({ stopPropagation: () => {} }, country);
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const countryName = entry.target.dataset.country;
+      const country = filtered.find(d => d.properties.name === countryName);
+      if (country) {
+        // Κάλεσε το clicked σαν να έγινε click
+        clicked({ stopPropagation: () => {} }, country);
       }
-    });
-  }, { threshold: 0.5 });
-
-  steps.forEach(step => observer.observe(step));
-});
+    }
+  });
+}, { threshold: 0.5 });
