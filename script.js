@@ -155,7 +155,7 @@ function clicked(event, d) {
     `<h3>${countryName}</h3><p>${info}</p>`
   );
 
-  // Zoom στη χώρα
+  // Zoom 
   svg.transition().duration(750).call(
     zoom.transform,
     d3.zoomIdentity
