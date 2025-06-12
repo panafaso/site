@@ -5,12 +5,13 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
   const projection = d3.geoNaturalEarth1();
   const path = d3.geoPath(projection);
 
-  const svg = d3.select("#map")
-    .append("svg")
-    .attr("viewBox", [0, 0, width, height])
-    .attr("width", width)
-    .attr("height", height)
-    .attr("style", "max-width: 100%; height: auto; background-color: #020220;");
+ const svg = d3.select("#map")
+  .append("svg")
+  .attr("viewBox", [0, 0, width, height])
+  .attr("preserveAspectRatio", "xMidYMid meet")
+  .style("width", "100%")
+  .style("height", "100%")
+  .style("background-color", "#020220");
 
   const g = svg.append("g");
 
