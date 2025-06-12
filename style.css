@@ -26,18 +26,6 @@ body {
   align-items: center;
 }
 
-#country-title {
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 32px;
-  color: white;
-  font-weight: bold;
-  z-index: 100;
-  pointer-events: none;
-}
-
 .scrolly {
   width: 50%;
   padding: 2rem;
