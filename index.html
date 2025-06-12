@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Cybersecurity Scrollytelling Map</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cybersecurity Map Scrollytelling</title>
   <link rel="stylesheet" href="style.css">
+  <!-- D3.js και TopoJSON -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/topojson-client@3"></script>
 </head>
 <body>
-  <h1>Cybersecurity per Country</h1>
-  <div id="map"></div>
+  <h1 style="text-align: center; color: white; margin-top: 1rem;">Cybersecurity Across Countries</h1>
 
-  <!-- Scrollytelling sections -->
+  <!-- Χώρος για το χάρτη -->
+  <div id="map" style="margin: 0 auto; max-width: 940px;"></div>
+
+  <!-- Scroll Sections (μία ανά χώρα) -->
   <div class="scroller">
-    <section data-country="France">Scroll to France</section>
-    <section data-country="Germany">Scroll to Germany</section>
-    <section data-country="United States of America">Scroll to USA</section>
-    <!-- κλπ για όλες τις χώρες -->
+    <section data-country="France"><h2>France</h2></section>
+    <section data-country="Germany"><h2>Germany</h2></section>
+    <section data-country="United States of America"><h2>USA</h2></section>
+    <section data-country="Russia"><h2>Russia</h2></section>
+    <section data-country="China"><h2>China</h2></section>
+    <section data-country="India"><h2>India</h2></section>
+    <section data-country="United Kingdom"><h2>UK</h2></section>
+    <section data-country="Japan"><h2>Japan</h2></section>
+    <section data-country="Brazil"><h2>Brazil</h2></section>
+    <section data-country="Australia"><h2>Australia</h2></section>
   </div>
 
+  <!-- Δικό σου script -->
   <script src="script.js"></script>
 </body>
 </html>
