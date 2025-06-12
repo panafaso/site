@@ -4,20 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cybersecurity Map Scrollytelling</title>
+
+  <!-- Σύνδεση CSS -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- D3 & TopoJSON -->
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <script src="https://unpkg.com/topojson-client@3"></script>
 </head>
 <body>
 
   <div class="container">
-    <!-- Σταθερός χάρτης και τίτλος -->
+    
+    <!-- Περιοχή του χάρτη (αριστερά ή κέντρο) -->
     <div class="graphic">
+      <!-- Τίτλος της χώρας (πάνω από τον χάρτη) -->
       <div id="country-title"></div>
+
+      <!-- SVG Χάρτης -->
       <div id="map"></div>
     </div>
 
-    <!-- Scroll Κείμενο (ένα ανά χώρα) -->
+    <!-- Scroll Κείμενο (ένα βήμα ανά χώρα) -->
     <div class="scrolly">
       <div class="step" data-country="France"><h2>France</h2></div>
       <div class="step" data-country="Germany"><h2>Germany</h2></div>
@@ -32,6 +40,7 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script src="script.js"></script>
 </body>
 </html>
