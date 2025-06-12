@@ -1,32 +1,19 @@
 body {
-  margin: 0;
-  font-family: sans-serif;
-  background-color: #020220;
+  background: #020220;
   color: white;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
 }
-
-#scrolly-container {
-  display: flex;
-  flex-direction: row;
+#map {
+  width: 100%;
+  height: 500px;
 }
-
-#graphic {
-  position: sticky;
-  top: 0;
-  width: 70%;
+.scroller {
+  margin-top: 100vh;
+}
+section {
   height: 100vh;
-}
-
-#text {
-  width: 30%;
-  padding: 20px;
-  overflow-y: scroll;
-  height: 100vh;
-}
-
-.step {
-  margin-bottom: 150px;
-  padding: 10px;
-  font-size: 1.2em;
-  border-left: 4px solid white;
+  padding: 3rem;
+  border-bottom: 1px solid white;
 }
