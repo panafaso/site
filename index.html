@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Cybersecurity Scrollytelling Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-  <body style="margin: 0; background-color: #020220; color: white;">
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Cybersecurity Scrollytelling Map</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://unpkg.com/topojson-client@3"></script>
+</head>
+<body>
+  <h1>Cybersecurity per Country</h1>
+  <div id="map"></div>
+
+  <!-- Scrollytelling sections -->
+  <div class="scroller">
+    <section data-country="France">Scroll to France</section>
+    <section data-country="Germany">Scroll to Germany</section>
+    <section data-country="United States of America">Scroll to USA</section>
+    <!-- κλπ για όλες τις χώρες -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
 </html>
