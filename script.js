@@ -157,7 +157,7 @@ d3.json("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(w
     g.attr("stroke-width", 1 / transform.k);
   }
 
-  const steps = document.querySelectorAll("section");
+  const steps = document.querySelectorAll(".step");
   const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
